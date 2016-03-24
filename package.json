@@ -1,0 +1,15 @@
+{
+  "name": "skype-chatmonitor",
+  "version": "1.0.0",
+  "description": "Monitors skype for converted p2p chats and outputs chat/conversation data to file",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Brian Tanner",
+  "license": "MIT",
+  "dependencies": {
+    "async": "^2.0.0-rc.1",
+    "sqlite3": "^3.1.2"
+  }
+}
