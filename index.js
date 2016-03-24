@@ -55,16 +55,20 @@ async.waterfall([
 
     db.serialize(() => {
       // list cloud p2p chats
-      db.each(query, (err, row) => {
+      db.all(query, (err, rows) => {
         if (err) { return callback(err); }
 
-        let ident = row.identity.split(':')[1].split('@')[0];
-        row.ident_decoded = base64.decode(ident);
+        rows.forEach(row => {
+          let ident = row.identity.split(':')[1].split('@')[0];
+          row.ident_decoded = base64.decode(ident);
 
-        console.log(row);
+          console.log(row);
+        });
+        
+        return callback(null);
+
       });
 
-      return callback();
     });
   }
 
