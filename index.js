@@ -76,11 +76,22 @@ async.waterfall([
         let chats = [];
 
         rows.forEach(row => {
-          let ident = row.identity.split(':')[1].split('@')[0];
+          let ident = row.identity.split(':')[1].split('@')[0],
+              updated = false;
+
           row.ident_decoded = base64.decode(ident);
 
           if (botConfig.monitor[row.ident_decoded]) {
             row.monitor = botConfig.monitor[row.ident_decoded];
+            updated = true;
+          }
+
+          if (botConfig.monitorghost && botConfig.monitorghost[row.ident_decoded]) {
+            row.monitorghost = botConfig.monitorghost[row.ident_decoded];
+            updated = true;
+          }
+
+          if (updated) {
             chats.push(row);
           }
 
